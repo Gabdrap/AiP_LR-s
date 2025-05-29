@@ -1,0 +1,65 @@
+#include <iostream>
+#include <Windows.h>
+
+using namespace std;
+
+double Fact(int N) 
+{
+    if (N < 0) 
+    {
+        return 0;
+    }
+    double result = 1;
+    for (int i = 1; i <= N; ++i) 
+    {
+        result *= i;
+    }
+    return result;
+}
+int two(int N) 
+{    
+    int count = 0;
+    while (N % 2 == 0) {
+        N /= 2;
+        count++;
+    }
+    return count;
+}
+
+int main()
+{
+    SetConsoleCP(1251);
+    SetConsoleOutputCP(1251);
+    int choise;
+    cout << "1" "\n";
+    cout << "2" "\n";
+    cout << "Выберите задание" "\n";
+    cin >> choise;
+
+    if (choise == 1)
+    {
+        int num1;
+        int num2;
+        int num3;
+        int num4;
+        int num5;
+        cout << "Введите пять целых чисел: ";
+        cin >> num1 >> num2 >> num3 >> num4 >> num5;
+        cout << "Факториалы: " << '\n';
+        cout << Fact(num1) << '\n';
+        cout << Fact(num2) << '\n';
+        cout << Fact(num3) << '\n';
+        cout << Fact(num4) << '\n';
+        cout << Fact(num5) << '\n';
+    }
+    if (choise == 2)
+    {
+        int number;
+
+        cout << "Введите целое число: ";
+        cin >> number;
+
+        int delenie = two(number);
+        cout << "Число " << number << " можно делить на два " << delenie << " раз, пока результат целый";
+    }
+}
