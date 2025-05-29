@@ -1,0 +1,81 @@
+#include <iostream>
+#include <Windows.h>
+#include <cstring>
+using namespace std;
+
+struct Weather {
+    float temp;
+    float speed;
+    char prec[10];
+    char wind[10];
+};
+
+double average(int n, int sum) {
+    float a = sum / n;
+    return a;
+}
+
+int main()
+{
+    SetConsoleCP(1251);
+    SetConsoleOutputCP(1251);
+
+    Weather w;
+    float averageTemp = 0;
+    float averageSpeed = 0;
+    int rain = 0;
+    int snow = 0;
+    int n = 0;
+    char quit[5];
+
+    while (true)
+    {
+        cout << "day " << n + 1 << ":" << '\n';
+        cout << "temperature: " << '\n';
+        cin >> w.temp;
+        averageTemp += w.temp;
+
+        cout << "wind: " << '\n';
+        cin >> w.wind;
+
+        cout << "wind speed: " << '\n';
+        cin >> w.speed;
+        averageSpeed += w.speed;
+
+        cout << "precipitation: rain, snow" << '\n';
+        cin >> w.prec;
+        if (strcmp(w.prec, "rain") == 0) {
+            rain++;
+        }
+        else {
+            snow++;
+        }
+
+        n++;
+
+        cout << "type quit to finish" << '\n';
+        cin >> quit;
+
+        if (strcmp(quit, "quit") == 0) {
+            break;
+        }
+    }
+
+    
+    cout << "Average temperature: " << average(n, averageTemp) << '\n';
+    cout << "Average wind speed: " << average(n, averageSpeed) << '\n';
+    if (rain >= snow)
+    {
+        cout << "Наиболее частые осадки: дождь" << endl;
+    }
+    else if (rain = snow)
+    {
+        cout << "Снега и дождя выпало одинаково" << endl;
+    }
+    else
+    {
+        cout << "Наиболее частые осадки: снег" << endl;
+    }
+
+    return 0;
+}
