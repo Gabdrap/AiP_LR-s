@@ -1,0 +1,73 @@
+#include <iostream>
+using namespace std;
+
+struct Node {
+    int data;
+    Node* next;
+    Node(int v) : data(v), next(nullptr) {}
+};
+
+struct Stack {
+    Node* top;
+    Stack() : top(nullptr) {}
+
+    void push(int v) {
+        Node* n = new Node(v);
+        n->next = top;
+        top = n;
+    }
+
+    int pop() {
+        if (top) {
+            int res = top->data;
+            Node* t = top;
+            top = top->next;
+            delete t;
+            return res;
+        }
+        return -1;
+    }
+
+    bool contains(int v) {
+        for (Node* it = top; it; it = it->next) {
+            if (it->data == v) return true;
+        }
+        return false;
+    }
+
+    bool isEmpty() {
+        return top == nullptr;
+    }
+
+    void clear() {
+        while (!isEmpty()) pop();
+    }
+};
+
+int main() {
+    int arr[] = { 3, 5, 2, 3, 7, 5, 2, 9 };
+    int n = sizeof(arr) / sizeof(arr[0]);
+
+    Stack stack;
+
+    for (int i = 0; i < n; ++i) {
+        if (!stack.contains(arr[i])) {
+            stack.push(arr[i]);
+        }
+    }
+
+    int uniqueCount = 0;
+    int* temp = new int[n];
+    while (!stack.isEmpty()) {
+        temp[uniqueCount++] = stack.pop();
+    }
+
+    cout << "Массив без дубликатов: ";
+    for (int i = uniqueCount - 1; i >= 0; --i) {
+        cout << temp[i] << " ";
+    }
+    cout << endl;
+
+    delete[] temp;
+    return 0;
+}
