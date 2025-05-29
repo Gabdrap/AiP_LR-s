@@ -1,0 +1,104 @@
+#include <iostream>
+#include <Windows.h>
+
+using namespace std;
+bool a;
+bool b;
+bool c;
+bool r1;
+bool r2;
+bool r3;
+bool r4;
+int x;
+int y;
+int num1;
+int num2;
+int num3;
+int neg;
+
+int main()
+{
+    SetConsoleCP(1251);
+    SetConsoleOutputCP(1251);
+    int choise;
+    cout << "1" "\n";
+    cout << "2" "\n";
+    cout << "3" "\n";
+    cout << "Выберите задание" "\n";
+    cin >> choise;
+
+    if (choise == 1)
+    {
+        cout << "Введите значение A(1, 0): ";
+        cin >> a;
+        cout << "Введите значение B(1, 0): ";
+        cin >> b;
+        cout << "Введите значение C(1, 0): ";
+        cin >> c;
+        bool r1 = a || b && c;
+        if (r1 == true)
+        {
+            cout << "Значение выражения а): True" << "\n";
+        }
+        else
+        {
+            cout << "Значение выражения а): False" << "\n";
+        }
+
+        bool r2 = !(b || a || c);
+        if (r2 == true)
+        {
+            cout << "Значение выражения б): True" << "\n";
+        }
+        else
+        {
+            cout << "Значение выражения б): False" << "\n";
+        }
+
+        bool r3 = a && !b || c;
+        if (r3 == true)
+        {
+            cout << "Значение выражения в): True" << "\n";
+        }
+        else
+        {
+            cout << "Значение выражения в): False" << "\n";
+        }
+
+        bool r4 = !a && (!b || c);
+        if (r4 == true)
+        {
+            cout << "Значение выражения г): True" << "\n";
+        }
+        else
+        {
+            cout << "Значение выражения г): False" << "\n";
+        }
+    }
+    if (choise == 2)
+    {
+        {
+            cout << "Введите значение X: ";
+            cin >> x;
+            cout << "Введите значение Y: ";
+            cin >> y;
+            bool a = (x + y > 10) && (y < 3);
+            cout << "а)" << (a ? "Значение выражения - истина" : "Значение выражения - ложь") << "\n";
+
+            bool b = (x < -3) && y;
+            cout << "б)" << (b ? "Значение выражения - истина" : "Значение выражения - ложь") << "\n";
+        }
+    }
+    if (choise == 3)
+    {
+        cout << "Введите числа через пробел: " << "\n";
+        cin >> num1 >> num2 >> num3;
+        if (num1 < 0 || num2 < 0 || num3 < 0)
+        {
+            cout << "The above statement is true";
+        }
+        else {
+            cout << "The above statement is false";
+        }
+    }
+}
