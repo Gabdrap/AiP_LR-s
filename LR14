@@ -1,0 +1,35 @@
+#include <iostream>
+#include <Windows.h>
+#include <fstream>
+
+using namespace std;
+
+int main()
+{
+    SetConsoleCP(1251);
+    SetConsoleOutputCP(1251);
+    ifstream fin("input.txt");
+
+    if (!fin)
+    {
+        cout << "Ошибка открытия файла!" << endl;
+        return 1;
+    }
+
+    char ch;
+    int digitCount = 0;
+
+    while (fin.get(ch))
+    {
+        if (ch >= '0' && ch <= '9') 
+        {
+            digitCount++;
+        }
+    }
+    
+    fin.close();
+
+    cout << "Количество цифр в файле: " << digitCount << endl;
+
+    return 0;
+}
