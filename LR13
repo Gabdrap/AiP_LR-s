@@ -1,0 +1,67 @@
+#include <iostream>
+#include <Windows.h>
+
+using namespace std;
+
+bool isPalindrome(int n, int reversed = 0) 
+{
+    if (n == 0) 
+    {
+        return reversed;
+    }
+
+    reversed = reversed * 10 + n % 10;
+
+    return isPalindrome(n / 10, reversed);
+}
+
+int tri(int a, int b) {
+    if (a > b) {
+        return 0;
+    }
+
+    int count = (a % 3 == 0) ? 1 : 0;
+
+    return count + tri(a + 1, b);
+}
+
+int main()
+{
+    SetConsoleCP(1251);
+    SetConsoleOutputCP(1251);
+    int choise;
+    cout << "1" "\n";
+    cout << "2" "\n";
+    cout << "Выберите задание" "\n";
+    cin >> choise;
+
+    if (choise == 1)
+    {
+        int number;
+        cout << "Введите трехзначное число: ";
+        cin >> number;
+
+        if (isPalindrome(number)) 
+        {
+            cout << "Число является палиндромом.";
+        }
+        else 
+        {
+            cout << "Число не является палиндромом.";
+        }
+    }
+    if (choise == 2)
+    {
+        int a, b;
+        cout << "Введите диапазон [a, b]: ";
+        cin >> a >> b;
+
+        if (a > b) {
+            cout << "Ошибка: a должно быть меньше или равно b.";
+            return 1;
+        }
+
+        int result = tri(a, b);
+        cout << "Количество чисел, кратных 3 в диапазоне [" << a << ", " << b << "]: " << result;
+    }
+}
