@@ -1,0 +1,99 @@
+#include <iostream>
+
+using namespace std;
+
+struct Node {
+    int data;
+    Node* next;
+    Node* prev;
+    Node(int value) : data(value), next(nullptr), prev(nullptr) {}
+};
+
+void push_back(Node*& head, Node*& tail, int value) {
+    Node* newNode = new Node(value);
+    if (!tail) {
+        head = tail = newNode;
+    }
+    else {
+        tail->next = newNode;
+        newNode->prev = tail;
+        tail = newNode;
+    }
+}
+
+void printList(Node* head) {
+    for (Node* it = head; it; it = it->next) {
+        cout << it->data << " ";
+    }
+    cout << endl;
+}
+
+Node* findNode(Node* head, int value) {
+    for (Node* it = head; it; it = it->next) {
+        if (it->data == value) return it;
+    }
+    return nullptr;
+}
+
+void swapNodes(Node*& head, Node*& tail, Node* a, Node* b) {
+    if (!a || !b || a == b) return;
+
+    if (a->next == b) {
+        Node* ap = a->prev;
+        Node* bn = b->next;
+
+        if (ap) ap->next = b; else head = b;
+        b->prev = ap;
+        b->next = a;
+        a->prev = b;
+        a->next = bn;
+        if (bn) bn->prev = a; else tail = a;
+        return;
+    }
+    if (b->next == a) {
+        swapNodes(head, tail, b, a);
+        return;
+    }
+
+    Node* ap = a->prev;
+    Node* an = a->next;
+    Node* bp = b->prev;
+    Node* bn = b->next;
+
+    if (ap) ap->next = b; else head = b;
+    if (an) an->prev = b; else tail = b;
+    if (bp) bp->next = a; else head = a;
+    if (bn) bn->prev = a; else tail = a;
+
+    a->prev = bp;
+    a->next = bn;
+    b->prev = ap;
+    b->next = an;
+}
+
+int main() {
+    Node* head = nullptr;
+    Node* tail = nullptr;
+
+    for (int i = 1; i <= 5; ++i) {
+        push_back(head, tail, i);
+    }
+    cout << "Исходный список: ";
+    printList(head);
+
+    Node* node2 = findNode(head, 2);
+    Node* node4 = findNode(head, 4);
+
+    swapNodes(head, tail, node2, node4);
+
+    cout << "После обмена 2 и 4: ";
+    printList(head);
+
+    Node* curr = head;
+    while (curr) {
+        Node* next = curr->next;
+        delete curr;
+        curr = next;
+    }
+    return 0;
+}
