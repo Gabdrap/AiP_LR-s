@@ -1,0 +1,39 @@
+#include <iostream>
+
+using namespace std;
+
+struct Node {
+    int data;
+    Node* next;
+    Node(int value) : data(value), next(nullptr) {}
+};
+
+Node* appendLists(Node* headA, Node* headB) {
+    if (headA == nullptr) {
+        return headB;
+    }
+    Node* curr = headA;
+    while (curr->next != nullptr) {
+        curr = curr->next;
+    }
+    curr->next = headB;
+    return headA;
+}
+
+int main() {
+    Node* a = new Node(1);
+    a->next = new Node(2);
+    a->next->next = new Node(3);
+
+    Node* b = new Node(4);
+    b->next = new Node(5);
+
+    Node* head = appendLists(a, b);
+
+    for (Node* it = head; it != nullptr; it = it->next) {
+        cout << it->data << " ";
+    }
+    cout << endl;
+
+    return 0;
+}
