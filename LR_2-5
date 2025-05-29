@@ -1,0 +1,84 @@
+#include <iostream>
+#include <Windows.h>
+#include <cstdlib>
+#include <ctime>
+
+using namespace std;
+
+void under(char* ptr, int size) {
+    for (int i = 0; i < size; i++) {
+        if (*(ptr + i) == ' ') {
+            *(ptr + i) = '_';
+        }
+    }
+}
+
+void swapHalves(char* ptr, int size) {
+    for (int i = 0; i < size / 2; i++) {
+        char temp = *(ptr + i);
+        *(ptr + i) = *(ptr + i + size / 2);
+        *(ptr + i + size / 2) = temp;
+    }
+}
+
+void swapPairs(char* ptr, int size) {
+    for (int i = 0; i < size - 1; i += 2) {
+        char temp = *(ptr + i);
+        *(ptr + i) = *(ptr + i + 1);
+        *(ptr + i + 1) = temp;
+    }
+}
+
+void reverse(char* ptr, int size) {
+    for (int i = 0; i < size / 2; i++) {
+        char temp = *(ptr + i);
+        *(ptr + i) = *(ptr + size - 1 - i);
+        *(ptr + size - 1 - i) = temp;
+    }
+}
+
+int main() {
+    SetConsoleCP(1251);
+    SetConsoleOutputCP(1251);
+    int choise;
+    cout << "Выберите задание: ";
+    cin >> choise;
+    if (choise == 1) {
+        char a[]{ "C++ is one of the world's popular programming languages" };
+        int size = sizeof(a) - 1;
+        under(a, size);
+        cout << a << endl;
+    }
+    if (choise == 2) {
+        char arr[]{ "Четное" };
+        int size = sizeof(arr) - 1;
+
+        cout << "Исходный массив: " << arr << endl;
+
+        swapHalves(arr, size);
+
+        cout << "Массив после замены половин: " << arr << endl;
+    }
+    if (choise == 3) {
+        char arr[]{ "Четное" };
+        int size = sizeof(arr) - 1;
+
+        cout << "Исходный массив: " << arr << endl;
+
+        swapPairs(arr, size);
+
+        cout << "Массив после замены пар: " << arr << endl;
+    }
+    if (choise == 4) {
+        char arr[]{ "Четное" };
+        int size = sizeof(arr) - 1;
+
+        cout << "Исходный массив: " << arr << endl;
+
+        reverse(arr, size);
+
+        cout << "Массив после замены: " << arr << endl;
+    }
+
+    return 0;
+}
