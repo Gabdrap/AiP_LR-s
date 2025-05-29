@@ -1,0 +1,84 @@
+#include <iostream>
+#include <Windows.h>
+#include <iomanip>
+
+using namespace std;
+
+int main()
+{
+    SetConsoleCP(1251);
+    SetConsoleOutputCP(1251);
+    int choise;
+    cout << "1" "\n";
+    cout << "2" "\n";
+    cout << "3" "\n";
+    cout << "Выберите задание" "\n";
+    cin >> choise;
+
+    if (choise == 1)
+    {
+        int N;
+
+        cout << "Введите целое число N: ";
+        cin >> N;
+
+        cout << "Разложение числа " << N << " на простые множители: ";
+
+        for (int i = 2; i <= N; ++i)
+        {
+            while (N % i == 0)
+            {
+                cout << i << " ";
+                N /= i;
+            }
+        }
+    }
+    if (choise == 2)
+    {
+        double distance = 5.0; // дистанция
+        double totalDistance = 0.0; // пробег
+        int days = 0; // Счетчик дней
+        int P = 1;
+
+        while (totalDistance <= 100.0) {
+            totalDistance += distance;
+            distance += distance * (P / 100.0);
+            days++;
+
+            if (P < 30) {
+                P++;
+            }
+        }
+
+        cout << "Количество дней: " << days << endl;
+        cout << "Суммарный пробег: " << fixed << setprecision(2) << totalDistance << " км" << endl;
+
+        return 0;
+    }
+    if (choise == 3)
+    {
+        int num = 2;
+
+        cout << "Простые числа от 2 до 100:\n";
+
+        while (num <= 100) {
+            int i = 2;
+            bool isPrime = true;
+
+            do {
+                if (num % i == 0 && i != num)
+                {
+                    isPrime = false;
+                    break;
+                }
+                i++;
+            } while (i * i <= num);
+
+            if (isPrime) {
+                cout << num << " ";
+            }
+
+            num++;
+        }
+    }
+}
