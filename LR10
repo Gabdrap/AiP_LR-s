@@ -1,0 +1,113 @@
+#include <iostream>
+#include <Windows.h>
+#include <string>
+
+using namespace std;
+
+int main()
+{
+    SetConsoleCP(1251);
+    SetConsoleOutputCP(1251);
+    int choise;
+    cout << "1" "\n";
+    cout << "2" "\n";
+    cout << "3" "\n";
+    cout << "4" "\n";
+    cout << "5" "\n";
+    cout << "6" "\n";
+    cout << "Выберите задание" "\n";
+    cin >> choise;
+
+    if (choise == 1)
+    {
+        int code;
+        char ch;
+
+        cout << "type characters and press Enter: ";
+        cin >> ch;
+        code = (int)ch;
+        cout << "ASCII-code is: " << code << endl;
+        cout << "the previous character is: " << (char)(code - 1) << endl;
+        cout << "the next character is: " << (char)(code + 1) << "\n" << endl;
+        cout << "press Enter to exit" << endl;
+        cin.get();
+        cin.get();
+    }
+    if (choise == 2)
+    {
+        float A;
+        cout << "Введите значение типа float: ";
+        cin >> A;
+        int intA = static_cast<int>(A);
+        cout << "Преобразованное значение: " << intA << endl;
+        //Остается только целая часть
+    }
+    if (choise == 3)
+    {
+        int value;
+        cout << "Введите значение: ";
+        cin >> value;
+        if (value)
+        {
+            cout << "Это число преобразуется в true: " << value;
+        }
+        else
+        {
+            cout << "Это число преобразуется в false: " << value;
+        }
+    }
+    if (choise == 4)
+    {
+        int minus;
+        cout << "Введите отрицательное число: ";
+        cin >> minus;
+        unsigned int unsign = static_cast<unsigned int>(minus); // Преобразование в беззнаковый тип
+
+        cout << "Отрицательное число: " << minus << endl;
+        cout << "Преобразованное в unsigned: " << unsign << endl;
+
+    }
+    if (choise == 5)
+    {
+        short S;
+        long L;
+        cout << "Введите сначала short, потом long через пробел: ";
+        cin >> S >> L;
+        int result = S + L;
+        cout << "Результат: " << result << endl;
+    }
+    if (choise == 6)
+    {
+        string input;
+        cout << "Введите число: ";
+        cin >> input;
+
+        // Преобразование строки в целое число
+        int number = stoi(input);
+
+        // Преобразование в байты
+        unsigned char byteValue = static_cast<unsigned char>(number);
+
+        // Вывод результата
+        cout << "Значение в байтах: " << static_cast<int>(byteValue);
+    }
+    if (choise == 7)
+    {
+        string n1;
+        cout << "Введите число: ";
+        cin >> n1;
+
+        // Преобразование строки в целое число
+        int chis = atoi(n1.c_str());
+
+        // Проверка на диапазон
+        if (chis < 0 || chis > 255) {
+            cout << "Не входит в диапазон [0, 255]" << endl;
+        }
+        else {
+            // Преобразование в unsigned char
+            unsigned char znach = static_cast<unsigned char>(chis);
+            cout << "Преобразованное значение: " << static_cast<int>(znach) << endl;
+        }
+    }
+}
