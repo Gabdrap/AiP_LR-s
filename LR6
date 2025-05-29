@@ -1,0 +1,115 @@
+#include <iostream>
+#include <Windows.h>
+#include <string>
+
+using namespace std;
+int first;
+int second;
+int third;
+int min1;
+
+int main()
+{
+    SetConsoleCP(1251);
+    SetConsoleOutputCP(1251);
+    int choise;
+    cout << "1" "\n";
+    cout << "2" "\n";
+    cout << "Выберите задание" "\n";
+    cin >> choise;
+
+    if (choise == 1)
+    {
+        int a;
+        int b;
+        int c;
+        int d;
+        int max;
+        int min;
+        cout << "Введите ваши числа через пробел: ";
+        cin >> a >> b >> c >> d;
+        max = a;
+        min = a;
+        if (b > max)
+        {
+            max = b;
+        }
+        if (c > max)
+        {
+            max = c;
+        }
+        if (d > max)
+        {
+            max = d;
+        }
+
+
+        if (d < min)
+        {
+            min = d;
+        }
+        if (b < min)
+        {
+            min = b;
+        }
+        if (c < min)
+        {
+            min = c;
+        }
+        cout << "Максимальное число: " << max << "\n";
+        cout << "Минимальное число: " << min;
+    }
+    if (choise == 2)
+    {
+        int num;
+        cout << "Введите ваше число: " << "\n";
+        cin >> num;
+        if (to_string(num).length() == 3)
+        {
+            first = num / 100;
+            second = (num / 10) % 10;
+            third = num % 10;
+            if (first <= second && first <= third) 
+            {
+                min1 = first * 100;
+                if (second <= third) 
+                {
+                    min1 += second * 10 + third;
+                }
+                else 
+                {
+                    min1 += third * 10 + second;
+                }
+            }
+            else if (second <= first && second <= third) 
+            {
+                min1 = second * 100;
+                if (first <= third) 
+                {
+                    min1 += first * 10 + third;
+                }
+                else 
+                {
+                    min1 += third * 10 + first;
+                }
+            }
+            else 
+            {
+                min1 = third * 100;
+                if (first <= second) 
+                {
+                    min1 += first * 10 + second;
+                }
+                else 
+                {
+                    min1 += second * 10 + first;
+                }
+            }
+            cout << "Минимально возможное число: " << min1;
+        }
+        else
+        {
+            cout << "Число должно быть трехзначным";
+        }
+    }
+}
