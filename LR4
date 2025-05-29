@@ -1,0 +1,57 @@
+#include <iostream>
+#include <Windows.h>
+using namespace std;
+int kg;
+int S;
+
+int main()
+{
+	SetConsoleCP(1251);
+	SetConsoleOutputCP(1251);
+	int choise;
+	cout << "1" "\n";
+	cout << "2" "\n";
+	cout << "3" "\n";
+	cout << "4" "\n";
+	cout << "Выберите задание" "\n";
+	cin >> choise, "\n";
+
+
+	if (choise == 1)
+	{
+		int x = 65530; //Неправильный тип данных, запятая вместо точки с запятой
+		int	y = 10; // Не объявлена переменная
+		x = x + y;
+		cout << "65530+10=" << x;
+		cin.get();
+		return 0;
+	}
+
+	if (choise == 2)
+	{
+		cout << "Size of char = " << sizeof(char) << "\n";
+		cout << "Size of short = " << sizeof(short) << "\n";
+		cout << "Size of int = " << sizeof(int) << "\n";
+		cout << "Size of float = " << sizeof(float) << "\n";
+		cout << "Size of double = " << sizeof(double);
+	}
+
+	if (choise == 3)
+	{
+		cout << "Введите килограммы: ";
+		cin >> kg;
+		cout << kg << "кг равно:" << "\n";
+		cout << kg * 1000 << "граммам" << "\n";
+		cout << kg * 0.01 << "центнерам" << "\n";
+		cout << kg * 0.001 << "тоннам" << "\n";
+	}
+
+	if (choise == 4)
+	{
+		cout << "Введите площадь окружности:" << "\n";
+		cin >> S;
+		cout << "l = " << 2 * sqrt(S / 3.14159) * 3.14159 << "\n";
+		cout << "d = " << 2 * sqrt(S / 3.14159) << "\n";
+		cout << "r = " << 2 * sqrt(S / 3.14159) /2;
+	}
+}
