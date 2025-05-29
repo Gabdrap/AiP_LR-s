@@ -1,0 +1,100 @@
+#include <iostream>
+#include <ctime>
+#include <stack>
+#include <random>
+#include <Windows.h>
+using namespace std;
+
+struct Tree {
+    int val;
+    Tree* left;
+    Tree* right;
+    Tree(int x) : val(x), left(0), right(0) {}
+
+};
+Tree* insert(Tree* root, int value) {
+    if (root == 0) {
+        return new Tree(value);
+    }
+    if (value < root->val) {
+        root->left = insert(root->left, value);
+    }
+    else {
+        root->right = insert(root->right, value);
+    }
+    return root;
+}
+
+int Recurs(Tree* root) {
+    if (root == nullptr) {
+        return 0;
+    }
+    if (root->left == nullptr && root->right == nullptr) {
+        return 1;
+    }
+    return Recurs(root->left) + Recurs(root->right);
+}
+
+int Iterat(Tree* root) {
+    if (root == nullptr) {
+        return 0;
+    }
+
+    stack<Tree*> s;
+    s.push(root);
+    int count = 0;
+
+    while (!s.empty()) {
+        Tree* node = s.top();
+        s.pop();
+
+        if (node->left == nullptr && node->right == nullptr) {
+            count++;
+        }
+
+        if (node->right != nullptr) {
+            s.push(node->right);
+        }
+        if (node->left != nullptr) {
+            s.push(node->left);
+        }
+    }
+
+    return count;
+}
+
+int main() {
+    SetConsoleCP(1251);
+    SetConsoleOutputCP(1251);
+    random_device rd;
+    mt19937 gen(rd());
+    uniform_int_distribution<> dis(1, 100); 
+
+    cout << "Введите количество элементов в бинарном дереве: ";
+    int j; cin >> j;
+
+    Tree* root = 0;
+    for (int i = 1; i < j; i++) {
+        root = insert(root, dis(gen));
+    }
+
+    clock_t start_rec = clock();
+    int leaves_rec = Recurs(root);
+    clock_t end_rec = clock();
+    double elapsed_rec = static_cast<double>(end_rec - start_rec) / CLOCKS_PER_SEC;
+
+    clock_t start_iter = clock();
+    int leaves_iter = Iterat(root);
+    clock_t end_iter = clock();
+    double elapsed_iter = static_cast<double>(end_iter - start_iter) / CLOCKS_PER_SEC;
+
+    cout << "Рекурсивный метод:" << endl;
+    cout << "Количество листьев: " << leaves_rec << endl;
+    cout << "Время выполнения: " << elapsed_rec << " секунд" << endl << endl;
+
+    cout << "Итеративный метод:" << endl;
+    cout << "Количество листьев: " << leaves_iter << endl;
+    cout << "Время выполнения: " << elapsed_iter << " секунд" << endl;
+
+    return 0;
+}
