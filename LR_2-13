@@ -1,0 +1,32 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+string delet(string str) {
+    string punc = ".,;!?—:()";
+    string result;
+    for (char c : str) {
+        bool is_punct = false;
+        for (char p : punc) {
+            if (c == p) {
+                is_punct = true;
+                break;
+            }
+        }
+        if (!is_punct) {
+            result += c;
+        }
+    }
+    return result;
+}
+
+int main() {
+    cout << "Inter string: ";
+    string input;
+    getline(cin, input);
+    string cleaned = delet(input);
+    cout << "String whithout punctuations: " << cleaned << endl;
+
+
+    return 0;
+}
