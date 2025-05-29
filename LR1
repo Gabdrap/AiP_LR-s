@@ -1,0 +1,36 @@
+#include <iostream>
+#include <Windows.h>
+using namespace std;
+
+string year;
+string month;
+string day;
+string timi;
+
+int main()
+{
+    SetConsoleCP(1251);
+    SetConsoleOutputCP(1251);
+    int choise;
+    cout << "1" "\n";
+    cout << "2" "\n";
+    cout << "Выберите задание" "\n";
+    cin >> choise, "\n";
+
+
+    if (choise == 1)
+    {
+        cout << "Таблица умножения""\n";
+        cout << "\t на 2" << "\t на 3" << "\n";
+        cout << "\t 2*1=2" << "\t 3*1=3""\n";
+        cout << "\t 2*2=4" << "\t 3*2=6""\n";
+        cout << "\t 2*3=6" << "\t 3*3=9""\n";
+    }
+
+    if (choise == 2)
+    {
+        cout << "Введите год, затем месяц, затем день, затем время:" << "\n";
+        cin >> year >> month >> day >> timi;
+        cout << "Год: " << year << "\t Месяц: " << month << "\t День: " << day << "\t Время: " << timi;
+    }
+}
