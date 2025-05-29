@@ -1,0 +1,101 @@
+#include <iostream>
+#include <Windows.h>
+#include <string>
+
+using namespace std;
+string number;
+string revers;
+int width;
+int length;
+int width_1;
+int length_1;
+int a;
+int b;
+int oper;
+
+int main()
+{
+    SetConsoleCP(1251);
+    SetConsoleOutputCP(1251);
+    int choise;
+    cout << "1" "\n";
+    cout << "2" "\n";
+    cout << "3" "\n";
+    cout << "Выберите задание" "\n";
+    cin >> choise;
+
+    if (choise == 1)
+    {
+        cout << "Введите число(оно должно быть трехзначным):    ";
+        cin >> number;
+        if (number.length() == 3)
+        {
+            revers = "";
+            for (int i = number.length() - 1; i >= 0; i--)
+            {
+                revers = revers + number[i];
+            }
+            cout << "Это число наоборот: " << revers << "\n";
+            if (revers == number)
+            {
+                cout << "Это число является палиндромом";
+            }
+            else
+            {
+                cout << "Это число не является палиндромом";
+            }
+        }
+        else
+        {
+            cout << "Длина числа: " << number.length() << ". Пожалуйста, введите трехзначное число.";
+        }
+    }
+    if (choise == 2)
+    {
+        cout << "Введите длину конверта: ";
+        cin >> length;
+        cout << "Введите ширину конверта: ";
+        cin >> width;
+        cout << "Длина конверта: " << length << " Ширина конверта: " << width << "\n";
+        cout << "Введите длину открытки: ";
+        cin >> length_1;
+        cout << "Введите ширину открытки: ";
+        cin >> width_1;
+        cout << "Длина открытки: " << length_1 << " Ширина открытки: " << width_1 << "\n";
+        if (width > width_1 || length > length_1)
+        {
+            cout << "Открытка поместится";
+        }
+        else
+        {
+            cout << "Открытка не поместится";
+        }
+    }
+    if (choise == 3)
+    {
+        cout << "Введите ваши числа через пробел: ";
+        cin >> a >> b;
+        cout << "Какое действие вы хотите выполинть?" << "\n";
+        cout << "1 - сложение"<< "\n";
+        cout << "2 - вычитание" << "\n";
+        cout << "3 - умножение" << "\n";
+        cout << "4 - деление" << "\n";
+        cin >> oper;
+        if (oper == 1)
+        {
+            cout << "При сложении этих чисел получится следующее: " << a + b;
+        }
+        if (oper == 2)
+        {
+            cout << "При вычитании получится следующее: " << a - b;
+        }
+        if (oper == 3)
+        {
+            cout << "При ужножении этих чисел получится следующее: " << a * b;
+        }
+        if (oper == 4)
+        {
+            cout << "При делении получится следующее: " << a / b;
+        }
+    }
+}
