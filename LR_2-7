@@ -1,0 +1,136 @@
+#include <iostream>
+#include <Windows.h>
+#include <cstdlib>
+#include <ctime>
+
+using namespace std;
+
+void bubbleSort(int* arr, int size) {
+    for (int i = 0; i < size - 1; i++) {
+        for (int j = 0; j < size - i - 1; j++) {
+            if (arr[j] > arr[j + 1]) {
+                int temp = arr[j];
+                arr[j] = arr[j + 1];
+                arr[j + 1] = temp;
+            }
+        }
+    }
+}
+
+int count3(int* arr, int size) {
+    int count = 0;
+    for (int i = 0; i < size; i++) {
+        if (arr[i] % 3 == 0) {
+            count++;
+        }
+    }
+    return count;
+}
+
+int* MinNegative(int* arr, int size) {
+    int* minNegative = nullptr;
+    for (int i = 0; i < size; i++) {
+        if (arr[i] < 0) {
+            if (minNegative == nullptr || arr[i] < *minNegative) {
+                minNegative = &arr[i];
+            }
+        }
+    }
+    return minNegative;
+}
+
+void swapColumns(int** matrix, int M, int K1, int K2) {
+    for (int i = 0; i < M; i++) {
+        int temp = matrix[i][K1];
+        matrix[i][K1] = matrix[i][K2];
+        matrix[i][K2] = temp;
+    }
+}
+
+void printMatrix(int** matrix, int M, int N) {
+    for (int i = 0; i < M; i++) {
+        for (int j = 0; j < N; j++) {
+            cout << matrix[i][j] << " ";
+        }
+        cout << endl;
+    }
+}
+
+int main() {
+    SetConsoleCP(1251);
+    SetConsoleOutputCP(1251);
+    int choise;
+    cout << "Выберите задание: ";
+    cin >> choise;
+    if (choise == 1) {
+        const int n = 100;
+        int* arr = new int[n];
+
+        srand(static_cast<unsigned int>(time(0)));
+
+        for (int i = 0; i < n; i++) {
+            arr[i] = rand() % 101 - 50;
+        }
+
+        bubbleSort(arr, n);
+        cout << "Отсортированный массив: ";
+        for (int i = 0; i < n; i++) {
+            cout << arr[i] << " ";
+        }
+        cout << endl;
+
+        int count = count3(arr, n);
+        cout << "Количество элементов, кратных трем: " << count << endl;
+
+        int* minNegative = MinNegative(arr, n);
+        if (minNegative != nullptr) {
+            cout << "Адрес минимального отрицательного элемента: " << minNegative << endl;
+        }
+        else {
+            cout << "Отрицательных элементов нет." << endl;
+        }
+
+        delete[] arr;
+    }
+    if (choise == 2) {
+        srand(static_cast<unsigned int>(time(0)));
+
+        int M = rand() % 5 + 1;
+        int N = rand() % 5 + 1;
+
+        int** matrix = new int* [M];
+        for (int i = 0; i < M; i++) {
+            matrix[i] = new int[N];
+        }
+
+        for (int i = 0; i < M; i++) {
+            for (int j = 0; j < N; j++) {
+                matrix[i][j] = rand() % 100;
+            }
+        }
+
+        cout << "Сгенерированная матрица:" << endl;
+        printMatrix(matrix, M, N);
+
+        int K1 = rand() % N;
+        int K2 = rand() % N;
+
+        while (K1 == K2) {
+            K2 = rand() % N;
+        }
+
+        cout << "Случайные индексы столбцов для замены: K1 = " << K1 + 1 << ", K2 = " << K2 + 1 << endl;
+
+        swapColumns(matrix, M, K1, K2);
+
+        cout << "Матрица после замены столбцов K1 и K2:" << endl;
+        printMatrix(matrix, M, N);
+
+        for (int i = 0; i < M; i++) {
+            delete[] matrix[i];
+        }
+        delete[] matrix;
+    }
+
+    return 0;
+}
