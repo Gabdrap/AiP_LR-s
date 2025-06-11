@@ -1,76 +1,33 @@
 #include <iostream>
 using namespace std;
-template <typename T, int N>
-void nemei(T(&matrix)[N][N]) {
-    for (int i = 0; i < N; ++i) {
-        for (int j = i + 1; j < N; ++j) {
 
-            swap(matrix[i][j], matrix[j][i]);
-        }
-    }
+template <typename T, int N>
+T multiplyAll(T (&matrix)[N][N]) {
+    T product = 1;
+    for (int i = 0; i < N; ++i)
+        for (int j = 0; j < N; ++j)
+            product *= matrix[i][j];
+    return product;
 }
 
 int main() {
-
-    int matrix[3][3] = {
+    int matrix_int[3][3] = {
         {1, 2, 3},
-        {4, 5, 6},
-        {7, 8, 9}
+        {4, 1, 6},
+        {7, 8, 1}
     };
-    float matric[3][3] = {
-    {1.2, 2.2, 3.9},
-    {4.3, 5.5, 6.8},
-    {7.8, 8.1, 9.9}
-    };
-    char matriy[3][3] = {
-    {'a', 'd', 'g'},
-    {'b', 'e', 'h'},
-    {'c', 'f', 'i'}
-    };
-    cout << "Original : " << endl;
-    for (size_t i = 0; i < 3; ++i) {
-        for (size_t j = 0; j < 3; ++j) {
-            cout << matrix[i][j] << " ";
-        }
-        cout << endl;
-    }
-    cout << "Original : " << endl;
-    for (size_t i = 0; i < 3; ++i) {
-        for (size_t j = 0; j < 3; ++j) {
-            cout << matric[i][j] << " ";
-        }
-        cout << endl;
-    }
-    cout << "Original : " << endl;
-    for (size_t i = 0; i < 3; ++i) {
-        for (size_t j = 0; j < 3; ++j) {
-            cout << matriy[i][j] << " ";
-        }
-        cout << endl;
-    }
-    nemei(matrix);
-    nemei(matric);
-    nemei(matriy);
 
-    cout << "Transposed : " << endl;
-    for (size_t i = 0; i < 3; ++i) {
-        for (size_t j = 0; j < 3; ++j) {
-            cout << matrix[i][j] << " ";
-        }
-        cout << endl;
-    }
-    cout << "Transposed : " << endl;
-    for (size_t i = 0; i < 3; ++i) {
-        for (size_t j = 0; j < 3; ++j) {
-            cout << matric[i][j] << " ";
-        }
-        cout << endl;
-    } cout << "Transposed : " << endl;
-    for (size_t i = 0; i < 3; ++i) {
-        for (size_t j = 0; j < 3; ++j) {
-            cout << matriy[i][j] << " ";
-        }
-        cout << endl;
-    }
+    float matrix_float[3][3] = {
+        {1.0f, 1.5f, 2.0f},
+        {0.5f, 1.0f, 2.0f},
+        {1.0f, 1.0f, 2.0f}
+    };
+
+    int prod_int = multiplyAll(matrix_int);
+    float prod_float = multiplyAll(matrix_float);
+
+    cout << "Произведение элементов (int): " << prod_int << endl;
+    cout << "Произведение элементов (float): " << prod_float << endl;
+
     return 0;
 }
