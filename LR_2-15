@@ -17,7 +17,8 @@ Tree* insert(Tree* root, int value) {
     }
     if (value < root->val) {
         root->left = insert(root->left, value);
-    } else {
+    }
+    else {
         root->right = insert(root->right, value);
     }
     return root;
@@ -29,40 +30,33 @@ int Recurs(Tree* root) {
     return Recurs(root->left) + Recurs(root->right);
 }
 
-// Итеративный метод без стека и STL (на основе Morris Traversal)
 int Iterat(Tree* root) {
+    if (root == nullptr) return 0;
+
+    Tree* stack[1000];
+    int top = -1;
+    stack[++top] = root;
+
     int count = 0;
-    Tree* current = root;
 
-    while (current != nullptr) {
-        if (current->left == nullptr) {
-            if (current->right == nullptr) {
-                count++;
-            }
-            current = current->right;
-        } else {
-            Tree* pre = current->left;
-            while (pre->right != nullptr && pre->right != current) {
-                pre = pre->right;
-            }
+    while (top >= 0) {
+        Tree* node = stack[top--];
 
-            if (pre->right == nullptr) {
-                pre->right = current;
-                current = current->left;
-            } else {
-                pre->right = nullptr;
-                if (current->right == nullptr) {
-                    count++;
-                }
-                current = current->right;
-            }
+        if (node->left == nullptr && node->right == nullptr) {
+            count++;
+        }
+
+        if (node->right != nullptr) {
+            stack[++top] = node->right;
+        }
+        if (node->left != nullptr) {
+            stack[++top] = node->left;
         }
     }
 
     return count;
 }
 
-// Освобождение памяти
 void deleteTree(Tree* root) {
     if (root != nullptr) {
         deleteTree(root->left);
@@ -106,7 +100,7 @@ int main() {
     cout << "Количество листьев: " << leaves_rec << endl;
     cout << "Время выполнения: " << elapsed_rec << " секунд" << endl << endl;
 
-    cout << "Итеративный метод (без stack):" << endl;
+    cout << "Итеративный метод (с ручным стеком):" << endl;
     cout << "Количество листьев: " << leaves_iter << endl;
     cout << "Время выполнения: " << elapsed_iter << " секунд" << endl;
 
